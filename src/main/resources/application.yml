@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: off
+#  flyway:
+#    enabled: true
+#  datasource:
+#    url: "jdbc:postgresql://localhost:5432/gateway?stringtype=unspecified&reWriteBatchedInserts=true"
+#    username: "user"
+#    password: "password"
+#    driver-class-name: "org.postgresql.Driver"
