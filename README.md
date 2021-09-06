@@ -1,7 +1,7 @@
 # Mestergruppen Job Application
 
-This is a simple Spring Boot application set up with Spring Web. 
-A controller, an `Event` type and a very simple job queue and Spring Scheduler is
+This is a simple Spring Boot application with Spring Web included. 
+A controller, an `Event` type, a very simple job queue and a Spring Scheduler is
 already set up. For the actual task, this is just a starting point, and you will 
 have to write and change all the code necessary to fulfill the task requirements 
 below. Your implementation will be evaluated and considered as a replacement for 
@@ -26,7 +26,7 @@ The categories you will be evaluated in:
 
 ## Requirements
 
-* Java 11
+* Java 11+
 * Docker/Docker Compose
 
 ## Build
@@ -48,8 +48,8 @@ This starts up Apache Zookeeper, Apache Kafka, Confluent Schema Registry and a P
 
 ### Description
 
-In this simple application we have here, there are several problems arising once we decide to make it 
-production ready in the cloud. 
+The purpose of this application is to provide a simple JSON over HTTP interface for clients to send us data. This data will then be delivered into our central datahub (in this case, Kafka). 
+However, there are several problems arising once we decide to make it production ready in the cloud. 
 
 1. If the application instance goes down, for any reason, all other applications depending on this one will fail.
 2. There is no way of knowing if jobs added to the job queue were executed or not in case of application failure as application state is fully in memory.
