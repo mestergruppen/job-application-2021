@@ -17,7 +17,7 @@ class JobController(private val jobQueue: JobQueue, private val objectMapper: Ob
 
     @PostMapping("/jobs", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun postEvents(@RequestHeader("X-Request-ID") requestId: String, @RequestBody events: List<Event>) {
-        log.info("POST /events, X-Request-ID: $requestId")
+        log.info("POST /jobs, X-Request-ID: $requestId")
 
         val results = events.map {
             jobQueue.addJob(it.eventId, objectMapper.writeValueAsString(it.eventPayload))
