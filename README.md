@@ -63,7 +63,7 @@ For this to work, you need to pinpoint where the problems are and implement a so
 * No job should ever be executed more than once (even with a multi-instance configuration).
 * We should be able to deploy new versions of the application at any point in time without worrying about jobs not being successfully completed.
 * Even with longer job execution times combined with high pressure, the server should strive to be highly available to clients with minimal response times. In other words, the server's thread pool should not suffer from long job execution times.
-* All jobs have to publish its data to a Kafka topic (`events` is the one used in the provided `KafkaConsumer`). It is not necessary to use a schema if you don't want to.
+* All jobs have to publish its data to a Kafka topic (`events` is the one used in the provided `KafkaConsumer`). It is not necessary to use a schema if you don't want to. 
 
 ### Submission
 Fork this repository and implement your solution. Provide a link to your fork with your application.
@@ -79,3 +79,5 @@ There is already a consumer configured and implemented to output the data for ea
 by looking at the server log. All you have to do to enable this is to uncomment the `enabled`-config line in `application.yml` (expects the docker containers to be running).
 
 Just autowire in the Kafka producer to use it: `private val kafkaProducer: KafkaProducer<String, String>`.
+The producer can be configured as you want. Play around with it if you want increase performance. 
+Take a look at the possible configurations here: [Kafka Producer Configs](https://kafka.apache.org/documentation/#producerconfigs) 
