@@ -2,7 +2,7 @@ version: '3'
 services:
   postgres:
     image: postgres:11-alpine
-    container_name: gateway-db
+    container_name: jobs-db
     environment:
     - "POSTGRES_PASSWORD=password"
     - "POSTGRES_USER=user"
@@ -43,6 +43,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: http://schema-registry:8090
       CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:29092
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1

@@ -4,7 +4,15 @@ spring:
 #  flyway:
 #    enabled: true
 #  datasource:
-#    url: "jdbc:postgresql://localhost:5432/gateway?stringtype=unspecified&reWriteBatchedInserts=true"
+#    url: "jdbc:postgresql://localhost:5432/jobs?stringtype=unspecified&reWriteBatchedInserts=true"
 #    username: "user"
 #    password: "password"
 #    driver-class-name: "org.postgresql.Driver"
+
+kafka:
+  bootstrap-server: "http://localhost:9092"
+  security-protocol: "PLAINTEXT"
+#  enabled: true
+#  schema-registry:
+#    url: "http://localhost:8081"
+#    enabled: false
