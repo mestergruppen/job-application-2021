@@ -80,4 +80,6 @@ by looking at the server log. All you have to do to enable this is to uncomment 
 
 Just autowire in the Kafka producer to use it: `private val kafkaProducer: KafkaProducer<String, String>`.
 The producer can be configured as you want. Play around with it if you want increase performance. 
-Take a look at the possible configurations here: [Kafka Producer Configs](https://kafka.apache.org/documentation/#producerconfigs) 
+Take a look at the possible configurations here: [Kafka Producer Configs](https://kafka.apache.org/documentation/#producerconfigs)
+
+If you want to play around with schemas, you can find information about the API here: [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)
