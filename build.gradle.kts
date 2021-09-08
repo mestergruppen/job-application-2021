@@ -13,6 +13,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	maven(url = "https://jcenter.bintray.com")
 }
 
 dependencies {
@@ -22,6 +23,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.apache.kafka:kafka-clients:2.8.0")
+	implementation("org.jetbrains.exposed:exposed-core:0.25.1")
+	implementation("org.jetbrains.exposed:exposed-jdbc:0.25.1")
+	implementation("org.jetbrains.exposed:exposed-java-time:0.25.1")
 
 	runtimeOnly("org.postgresql:postgresql")
 
