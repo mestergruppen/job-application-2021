@@ -76,7 +76,7 @@ There is already DDL for a table set up for you, but feel free to make any chang
 If you don't want to destroy and recreate your database after changing the schema, you will have to write changes in new files with a newer date/time then the initial one.
 
 Exposed is set up as the database layer framework, but if you want to use something you're more familiar with, just make the necessary changes. 
-Documentation for Exposed can found here: [Exposed](https://github.com/JetBrains/Exposed/wiki)
+Documentation for Exposed can be found here: [Exposed](https://github.com/JetBrains/Exposed/wiki)
 
 For the Kafka part, you can use the serialization format of your choice. Keep it simple as this is not the most important part of your task.
 There is already a consumer configured and implemented to output the data for each event published to the `events` topic, so you should be able to confirm that everything is working 
