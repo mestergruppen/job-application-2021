@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConfigurationProperties("kafka")
 @ConditionalOnProperty(prefix = "kafka", name = ["enabled"], matchIfMissing = false)
 data class KafkaConfig(
-        val bootstrapServers: String,
+        val bootstrapServer: String,
         val securityProtocol: String = CommonClientConfigs.DEFAULT_SECURITY_PROTOCOL,
         val schemaRegistry: SchemaRegistryConfig?
 )

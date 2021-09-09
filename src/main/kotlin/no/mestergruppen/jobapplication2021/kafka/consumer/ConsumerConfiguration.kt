@@ -18,10 +18,12 @@ class ConsumerConfiguration(private val kafkaConfig: KafkaConfig) {
 
     private fun configureProperties() =
             Properties().also {
-                it[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaConfig.bootstrapServers
+                it[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaConfig.bootstrapServer
                 it[ConsumerConfig.GROUP_ID_CONFIG] = "my-consumer-group"
                 it[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
                 it[ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG] = true
+                it[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = "org.apache.kafka.common.serialization.StringDeserializer"
+                it[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = "org.apache.kafka.common.serialization.StringDeserializer"
 
                 kafkaConfig.schemaRegistry?.let { schemaRegistryConfig ->
                     it["schema.registry.url"] = schemaRegistryConfig.url

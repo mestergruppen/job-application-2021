@@ -6,9 +6,8 @@ spring:
 #  datasource:
 #    url: "jdbc:postgresql://localhost:5432/jobs?stringtype=unspecified&reWriteBatchedInserts=true"
 #    username: "user"
-#    password: "password"
+#    password: "local"
 #    driver-class-name: "org.postgresql.Driver"
-#    enabled: true
 
 kafka:
   bootstrap-server: "http://localhost:9092"

@@ -4,7 +4,7 @@ services:
     image: postgres:11-alpine
     container_name: jobs-db
     environment:
-    - "POSTGRES_PASSWORD=password"
+    - "POSTGRES_PASSWORD=local"
     - "POSTGRES_USER=user"
     - "POSTGRES_DB=jobs"
     ports:

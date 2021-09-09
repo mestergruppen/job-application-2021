@@ -7,7 +7,7 @@ have to write and change all the code necessary to fulfill the task requirements
 below. Your implementation will be evaluated and considered as a replacement for 
 the traditional job application.
 
-We expect that this task should take between 16-32 hours (2-4 work days) to complete. 
+We expect that this task should take between 8-24 hours (1-2 work days) to complete. 
 All necessary dependencies should already be added, but feel free to use any 
 tools and libraries you are most comfortable with.
 
@@ -39,6 +39,7 @@ To start all dependencies with docker-compose, run this in the project root fold
 ```docker-compose up -d```
 
 This starts up Apache Zookeeper, Apache Kafka, Confluent Schema Registry and a Postgres database.
+Check out the [Tips & tricks](#tips-&-tricks) section below when you are ready to include these dependencies in your Spring configuration.
 
 ## Run
 
@@ -70,6 +71,7 @@ Fork this repository and implement your solution. Provide a link to your fork wi
 
 ### Tips & tricks
 
+#### Database
 Uncomment the flyway and datasource config in `application.yml` to start working with the database (expects the docker containers to be running).
 All DDL (table creation etc) can be written in the file `V20210827.1500__Initial_script.sql`. Flyway will then take care of schema migration on application startup.
 There is already DDL for a table set up for you, but feel free to make any changes you want.
@@ -78,6 +80,7 @@ If you don't want to destroy and recreate your database after changing the schem
 Exposed is set up as the database layer framework, but if you want to use something you're more familiar with, just make the necessary changes. 
 Documentation for Exposed can be found here: [Exposed](https://github.com/JetBrains/Exposed/wiki)
 
+#### Kafka
 For the Kafka part, you can use the serialization format of your choice. Keep it simple as this is not the most important part of your task.
 There is already a consumer configured and implemented to output the data for each event published to the `events` topic, so you should be able to confirm that everything is working 
 by looking at the server log. All you have to do to enable this is to uncomment the `enabled`-config line in `application.yml` (expects the docker containers to be running).
