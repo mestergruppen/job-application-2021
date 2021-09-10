@@ -10,17 +10,17 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit
 import javax.annotation.PreDestroy
 
-@Component
-@ConditionalOnProperty(prefix = "kafka", name = ["enabled"], matchIfMissing = false)
-class EventConsumer(private val kafkaConsumer: KafkaConsumer<String, String>) {
+class EventConsumer(private val kafkaConsumer: KafkaConsumer<String, String>) : Runnable {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    @EventListener
-    fun consume(event: ContextRefreshedEvent) {
+    @Volatile
+    private var running: Boolean = true
+
+    override fun run() {
         kafkaConsumer.subscribe(listOf(EVENT_TOPIC))
 
-        while (true) {
+        while (running) {
             val records = kafkaConsumer.poll(Duration.of(100, ChronoUnit.MILLIS))
 
             records.forEach {
@@ -29,9 +29,8 @@ class EventConsumer(private val kafkaConsumer: KafkaConsumer<String, String>) {
         }
     }
 
-    @PreDestroy
-    fun close() {
-        kafkaConsumer.close()
+    fun shutdown() {
+        running = false
     }
 }
 

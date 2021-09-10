@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
+import org.springframework.web.bind.annotation.RestController
 
-@Component
+@RestController
 class JobController(private val jobQueue: JobQueue, private val objectMapper: ObjectMapper) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -20,7 +21,8 @@ class JobController(private val jobQueue: JobQueue, private val objectMapper: Ob
         log.info("POST /jobs, X-Request-ID: $requestId")
 
         val results = events.map {
-            jobQueue.addJob(it.eventId, objectMapper.writeValueAsString(it.eventPayload))
+            val event = it.copy(requestId = requestId)
+            jobQueue.addJob(event.eventId, objectMapper.writeValueAsString(event.eventPayload))
         }
 
         log.info("Jobs added: ${results.filter { it }.size}")

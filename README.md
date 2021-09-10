@@ -72,7 +72,7 @@ Fork this repository and implement your solution. Provide a link to your fork wi
 ### Tips & tricks
 
 #### Database
-Uncomment the flyway and datasource config in `application.yml` to start working with the database (expects the docker containers to be running).
+Uncomment the flyway and datasource config in `application.yml` and the `jdbc` Spring dependency in `build.gradle.kt` to start working with the database (expects the docker containers to be running).
 All DDL (table creation etc) can be written in the file `V20210827.1500__Initial_script.sql`. Flyway will then take care of schema migration on application startup.
 There is already DDL for a table set up for you, but feel free to make any changes you want.
 If you don't want to destroy and recreate your database after changing the schema, you will have to write changes in new files with a newer date/time then the initial one.

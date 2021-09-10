@@ -10,5 +10,5 @@ class JobQueue {
 
     fun addJob(id: String, data: String):Boolean = jobs.add(Pair(id, data))
 
-    fun getJob(): Pair<String, String> = jobs.remove()
+    fun getJob(): Pair<String, String>? = if (jobs.isNotEmpty()) jobs.remove() else null
 }

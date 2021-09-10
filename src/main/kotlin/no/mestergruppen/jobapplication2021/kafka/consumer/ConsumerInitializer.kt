@@ -4,17 +4,39 @@ import no.mestergruppen.jobapplication2021.kafka.KafkaConfig
 import org.apache.kafka.clients.CommonClientConfigs
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.context.annotation.Bean
+import org.springframework.context.ApplicationListener
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.event.ContextRefreshedEvent
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import javax.annotation.PreDestroy
 
 @Configuration
 @ConditionalOnProperty(prefix = "kafka", name = ["enabled"], matchIfMissing = false)
-class ConsumerConfiguration(private val kafkaConfig: KafkaConfig) {
+class ConsumerInitializer(private val kafkaConfig: KafkaConfig) : ApplicationListener<ContextRefreshedEvent> {
 
-    @Bean
-    fun kafkaConsumer(): KafkaConsumer<String, String> = KafkaConsumer(configureProperties())
+    private val log = LoggerFactory.getLogger(javaClass)
+
+    private val kafkaConsumer: KafkaConsumer<String, String> = KafkaConsumer(configureProperties())
+    private val eventConsumer = EventConsumer(kafkaConsumer)
+    private val executorService = Executors.newFixedThreadPool(1)
+
+    override fun onApplicationEvent(event: ContextRefreshedEvent) {
+        executorService.submit(eventConsumer)
+    }
+
+    @PreDestroy
+    fun onDestroy() {
+        log.info("Shutting down EventConsumer...")
+
+        eventConsumer.shutdown()
+        kafkaConsumer.close()
+
+        executorService.awaitTermination(5, TimeUnit.SECONDS)
+    }
 
     private fun configureProperties() =
             Properties().also {
